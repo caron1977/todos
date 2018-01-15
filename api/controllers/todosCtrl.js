@@ -2,7 +2,6 @@
 
 exports.findTasks = function(req, res) {
 
-    // var tasks = [{task: "todo 1"}, {title: "todo 2"}];
     res.json(tasks);
 };
 
@@ -16,4 +15,22 @@ exports.createTask = function(req, res) {
 
     // echo the newly updated tasks list
     res.send(tasks);
+};
+
+exports.updateTask = function(req, res) {
+
+    // the task to update in json format
+    var taskDto = req.body;
+
+    // find the task to update in the task list
+    var taskEntity = tasks[taskDto.id];
+
+    // update the task
+    taskEntity.task = taskDto.task;
+
+    console.log(taskEntity);
+
+    // echo the newly updated task
+    res.send(taskEntity);
+
 };
