@@ -1,5 +1,6 @@
 'use strict';
 module.exports = function(app) {
+
     var todosCtrl = require('../controllers/todosCtrl');
 
     // C - REATE Operation
@@ -11,6 +12,6 @@ module.exports = function(app) {
     // U - PDATE Operation
     app.route('/update-task').post(todosCtrl.updateTask);
 
-
-
+    // D - DELETE Operation
+    app.route('/delete-task').post(todosCtrl.deleteTask);
 };
