@@ -6,7 +6,10 @@ module.exports = function(app) {
     // C - REATE Operation
     app.route('/create-task').post(todosCtrl.createTask);
 
-    // R - EAD Operation
+    // R - EAD Operation (one)
+    app.route('/task').get(todosCtrl.findOneTask);
+
+    // R - EAD Operation (all)
     app.route('/tasks').get(todosCtrl.findTasks);
 
     // U - PDATE Operation

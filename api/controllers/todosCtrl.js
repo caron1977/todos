@@ -5,6 +5,18 @@ exports.findTasks = function(req, res) {
     res.json(tasks);
 };
 
+exports.findOneTask = function(req, res) {
+
+    // find the task in the task list
+    var task = tasks[req.query.id];
+
+    // log the task found
+    console.log(task);
+
+    // echo the task found
+    res.json(task);
+};
+
 exports.createTask = function(req, res) {
 
     // the new task sent in json format
