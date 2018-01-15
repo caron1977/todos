@@ -1,5 +1,5 @@
 // this is my global task variable
-tasks = [{id: 0, task: "Brot kaufen"}, {id: 1, task: "Eis essen"}];
+tasks = [{id: 0, task: "Brot kaufen"}, {id: 1, task: "Eis essen"}, {id:2, task: "Datenbankverbindung erstellen"}];
 
 var express = require('express'),
     app = express(),
