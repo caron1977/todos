@@ -8,6 +8,12 @@ exports.findTasks = function(req, res) {
 
 exports.createTask = function(req, res) {
 
-    console.log('Hello from our todos service controller. awesome.');
-    res.send('Add a book');
+    // the new task sent in json format
+    console.log(req.body);
+
+    // add the new task to the tasks list
+    tasks.push(req.body);
+
+    // echo the newly updated tasks list
+    res.send(tasks);
 };
