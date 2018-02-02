@@ -1,11 +1,24 @@
-// this is my global task variable
-tasks = [{id: 0, task: "Brot kaufen"}, {id: 1, task: "Eis essen"}, {id:2, task: "Datenbankverbindung erstellen"}];
+// initialize database pool -->
+const Pool = require('pg-pool');
+const url = require('url');
+// const path = require('path');
 
-// initialize the database connection
-const pg = require('pg');
-const path = require('path');
-const myPSQLCon = process.env.DATABASE_URL || 'postgres://tecitsc_dbuser:1QDEWFKf@java-test.fhws.de:5432/fhws_master_grimmer';
+const dbparams = url.parse(process.env.DATABASE_URL);
+const auth = dbparams.auth.split(':');
 
+const config = {
+    user: auth[0],
+    password: auth[1],
+    host: dbparams.hostname,
+    port: dbparams.port,
+    database: dbparams.pathname.split('/')[1],
+    ssl: true
+};
+
+pool = new Pool(config);
+// initialize database pool <--
+
+// initialize the application server -->
 var express = require('express'),
     app = express(),
     port = process.env.PORT || 3000,
@@ -22,3 +35,4 @@ routes(app);
 app.listen(port);
 
 console.log('todo list RESTful API server started on: ' + port);
+// initialize the application server -->
