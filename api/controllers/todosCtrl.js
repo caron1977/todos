@@ -2,6 +2,7 @@
 
 exports.findTasks = function(req, res) {
 
+    console.log('try searching all tasks ...');
 
     pool.query('SELECT * FROM todo', function (err, resultlist) {
 
@@ -13,14 +14,14 @@ exports.findTasks = function(req, res) {
 
 exports.findOneTask = function(req, res) {
 
-    // find the task in the task list
-    var task = tasks[req.query.id];
+    console.log('try finding task with id: %s', req.query.id);
 
-    // log the task found
-    console.log(task);
+    pool.query('SELECT * FROM todo WHERE id = $1', [req.query.id], function (error, resultList) {
 
-    // echo the task found
-    res.json(task);
+        console.log('... found a task: %s', resultList.rows[0]);
+
+        res.json(resultList.rows[0]);
+    });
 };
 
 exports.createTask = function(req, res) {
