@@ -26,14 +26,20 @@ exports.findOneTask = function(req, res) {
 
 exports.createTask = function(req, res) {
 
-    // the new task sent in json format
-    console.log(req.body);
+    console.log('try creating new task: %s', req.body);
 
-    // add the new task to the tasks list
-    tasks.push(req.body);
+    pool.query('INSERT INTO todo (name) VALUES ($1)', [req.body.name], function (error, resultList) {
 
-    // echo the newly updated tasks list
-    res.send(tasks);
+        if (error) {
+
+            console.error('Error while creating task. message: %s', error.message);
+            res.status(500).json({error: 'Internal server error'});
+
+        } else {
+            console.log('... created new task.');
+            res.sendStatus(200);
+        }
+    });
 };
 
 exports.updateTask = function(req, res) {
