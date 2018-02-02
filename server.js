@@ -1,6 +1,11 @@
 // this is my global task variable
 tasks = [{id: 0, task: "Brot kaufen"}, {id: 1, task: "Eis essen"}, {id:2, task: "Datenbankverbindung erstellen"}];
 
+// initialize the database connection
+const pg = require('pg');
+const path = require('path');
+const myPSQLCon = process.env.DATABASE_URL || 'postgres://tecitsc_dbuser:1QDEWFKf@java-test.fhws.de:5432/fhws_master_grimmer';
+
 var express = require('express'),
     app = express(),
     port = process.env.PORT || 3000,
