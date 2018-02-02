@@ -44,33 +44,24 @@ exports.createTask = function(req, res) {
 
 exports.updateTask = function(req, res) {
 
-    // the task to update in json format
-    var taskDto = req.body;
+    console.log('try updating a task: %s', req.body);
 
-    // find the task to update in the task list
-    var taskEntity = tasks[taskDto.id];
+    pool.query('UPDATE todo SET name = $2 WHERE id = $1', [req.body.id, req.body.name], function (error, resultList) {
 
-    // update the task
-    taskEntity.task = taskDto.task;
+        if (error) {
 
-    console.log(taskEntity);
+            console.error('Error while updating task. message: %s', error.message);
+            res.status(500).json({error: 'Internal server error'});
 
-    // echo the newly updated task
-    res.send(taskEntity);
+        } else {
+            console.log('... updated a task.');
+            res.sendStatus(200);
+        }
+    });
 
 };
 
 exports.deleteTask = function(req, res) {
 
-    // the task to delete in json format
-    var taskDto = req.body;
-
-    // find the task to delete in the task list
-    var taskEntity = tasks[taskDto.id];
-
-    // delete the task
-    tasks.splice(taskEntity.id)
-
-    // echo the newly updated tasks list
-    res.send(tasks);
+    res.status(500).json({error: 'the operation delete is not yet implemented'});
 };
